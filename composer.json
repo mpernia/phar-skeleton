@@ -1,0 +1,22 @@
+{
+    "name": "mpernia/phar-skeleton",
+    "description": "A skeleton project to build a PHAR package in PHP",
+    "type": "project",
+    "license": "MIT",
+    "keywords": ["phar", "project", "skeleton"],
+    "authors": [
+        {
+            "name": "Maikel Enrique Pernia Matos",
+            "email": "mperniamatos@gmail.com"
+        }
+    ],
+    "homepage": "https://github.com/mpernia/phar-skeleton",
+    "require": {
+        "php": ">=8.2"
+    },
+    "scripts": {
+        "compile": "php bin/builder.php"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
