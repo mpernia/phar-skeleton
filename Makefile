@@ -1,5 +1,6 @@
-.PHONY: all clean build
+.PHONY: all clean build run stop check-index
 
+$(shell cp -n docker-compose.yml.dist docker-compose.yml || true)
 $(shell cp -n .env.dist .env || true)
 include .env
 export
@@ -31,6 +32,33 @@ build: ## Build phar file
 		echo "Error: Could not create phar file"; \
 		exit 1; \
 	fi
+
+check-index:
+	@if [ ! -f public/index.php ]; then \
+		mkdir -p public; \
+		echo "<?php\n\necho '<h1>It works!</h1>';\n\n?>" > public/index.php; \
+	else \
+		echo "public/index.php already exists"; \
+	fi
+
+run: ## Run docker-compose up
+	docker-compose up -d
+
+stop: ## Run docker-compose down
+	docker-compose down
+
+docker-build: ## Run docker-compose build
+	$(MAKE) check-index
+	docker-compose build
+
+dir-app: ## Access the app directory in the container
+	docker-compose exec app bash
+
+docker-composer-install: ## Run docker-compose build inside the container
+	docker-compose run --rm composer install
+
+docker-build-app: ## Build the PHAR file inside the container
+	docker-compose exec app make build
 
 help: ## Show this help message
 	@echo

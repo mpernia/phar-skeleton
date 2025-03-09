@@ -1,0 +1,16 @@
+services:
+  app:
+    image: php:8.2-cli
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: php -S 0.0.0.0:${APP_PORT:-8000} -t public
+    ports:
+      - "${APP_PORT:-8000}:${APP_PORT:-8000}"
+
+  composer:
+    image: composer:latest
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: install

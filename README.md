@@ -110,7 +110,16 @@ You can also use Composer to build the PHAR file:
 composer compile
 ```
 
-## Run or distribute the PHAR file
+### Additional Makefile Commands
+
+The following commands have been added to the Makefile:
+
+- **check-index:** Ensures that the `public/index.php` file exists. If it does not, it creates the file with a default message.
+- **docker-composer-install:** Runs `composer install` inside the Composer container to install dependencies.
+- **docker-build-app:** Executes `make build` inside the application container to build the PHAR file.
+- **dir-app:** Opens a bash shell in the application container for direct access to the app directory.
+
+### Run or distribute the PHAR file
 
 - You can run the PHAR file directly:
 
